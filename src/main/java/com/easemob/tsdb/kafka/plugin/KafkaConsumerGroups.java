@@ -7,6 +7,7 @@ import com.easemob.tsdb.thrift.rpc.service.ThriftMetricsService;
 import com.easemob.tsdb.utils.ConfigUtils;
 import kafka.consumer.Consumer;
 import kafka.consumer.ConsumerConfig;
+import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
 import kafka.message.MessageAndMetadata;
@@ -114,15 +115,17 @@ public class KafkaConsumerGroups implements Closeable, Constants {
         }
 
         public void run() {
-            for (MessageAndMetadata<byte[], byte[]> message : kafkaStream) {
-                persistMetrics(message);
-            }
+            ConsumerIterator<byte[], byte[]> it = kafkaStream.iterator();
+            while (it.hasNext())
+                persistMetrics(it.next());
+            System.out.println("-------------");
         }
 
         protected void persistMetrics(MessageAndMetadata<byte[], byte[]> message) {
             String metrics = null;
             try {
                 metrics = new String(message.message());
+                logger.debug("persisting metrics : "+metrics);
                 metricsService.putString(metrics);
                 plainTextMetricsCounter.incrementAndGet();
             } catch (TException e) {

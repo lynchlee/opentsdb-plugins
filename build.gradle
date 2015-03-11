@@ -1,7 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'eclipse'
 apply plugin: 'thrift'
-
+apply plugin: 'distribution'
+apply plugin: 'java-library-distribution'
 buildscript {
     repositories {
         mavenCentral()
@@ -25,9 +27,13 @@ dependencies {
                                                            	}
 	compile('org.apache.thrift:libthrift:0.9.2'){
 	exclude group: 'org.slf4j'
+	exclude group: 'org.apache.httpcomponents'
 	}
 	compile( 'org.apache.kafka:kafka_2.10:0.8.1.1'){
 	    exclude group: 'org.slf4j'
+	    exclude group: 'junit'
+	    exclude group: 'org.apache.zookeeper'
+	    exclude group: 'log4j'
 	}
 	compile( 'org.apache.zookeeper:zookeeper:3.4.6'){
 	    exclude group: 'org.slf4j'
@@ -71,3 +77,5 @@ generateThriftSource {
 idea.module.excludeDirs = []
 idea.module.sourceDirs += file('build/generated-src/thrift/main')
 idea.module.jdkName = '1.8'
+version='1.0.0'
+sourceCompatibility = 1.8
