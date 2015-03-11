@@ -8,6 +8,7 @@ import org.apache.thrift.async.AsyncMethodCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,6 +63,7 @@ public class ThriftMetricsService implements ThriftTsdbRpcService.Iface, ThriftT
                 return null;
             }
             String[] fragements = s.split(" ");
+            System.out.println(Arrays.toString(fragements));
             if (fragements.length < 4) {
                 return null;
             }
@@ -86,7 +88,7 @@ public class ThriftMetricsService implements ThriftTsdbRpcService.Iface, ThriftT
             tsdata.setValue(value);
             return tsdata;
         } catch (Exception e) {
-            logger.warn("Failed to parse '" + s + "' to data point, just ignore this");
+            logger.error("Failed to parse '" + s + "' to data point, just ignore this", e);
             return null;
         }
 

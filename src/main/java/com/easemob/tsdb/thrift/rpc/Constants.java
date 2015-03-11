@@ -28,7 +28,15 @@ public interface Constants {
 
     //这个topic用来接收纯文本的metrics数据
     String PLUGIN_KAFKA_PLAIN_TEXT_METRICS_TOPIC = PLUGIN_KAFKA_PERFIX+"text.topic";
+    //这个topic的partitions的个数
+    String PLUGIN_KAFKA_PLAIN_TEXT_METRICS_TOPIC_PARTITIONS = PLUGIN_KAFKA_PLAIN_TEXT_METRICS_TOPIC+".partitions";
+
     //这个topic用来接收TsData类型的thrift序列化之后的数据
     String PLUGIN_KAFKA_TSDATA_METRICS_TOPIC = PLUGIN_KAFKA_PERFIX+"tsdata.topic";
+    //这个topic的partitions的个数
+    String PLUGIN_KAFKA_TSDATA_METRICS_TOPIC_PARTITIONS = PLUGIN_KAFKA_TSDATA_METRICS_TOPIC+".partitions";
+    String PLUGIN_KAFKA_ZOOKEEPER_HOST = PLUGIN_KAFKA_PERFIX+"zookeeper.connect";
+    String OPENTSDB_ZOOKEEPER_HOST="tsd.storage.hbase.zk_quorum";
+    String PLUGIN_KAFKA_GROUP_ID = PLUGIN_KAFKA_PERFIX+"group.id";
 
 }
