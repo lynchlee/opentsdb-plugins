@@ -1,0 +1,73 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'thrift'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'co.tomlee.gradle.plugins:gradle-thrift-plugin:0.0.6'
+    }
+}
+repositories {
+    jcenter()
+	flatDir { dirs 'libs' }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.7'
+	compile('com.thinkaurelius.thrift:thrift-server:0.3.7' ) {
+                                                           	    exclude group: 'org.slf4j'
+                                                           	     exclude group: 'junit'
+                                                           	     exclude group: 'org.apache.thrift'
+                                                           	}
+	compile('org.apache.thrift:libthrift:0.9.2'){
+	exclude group: 'org.slf4j'
+	}
+	compile( 'org.apache.kafka:kafka_2.10:0.8.1.1'){
+	    exclude group: 'org.slf4j'
+	}
+	compile( 'org.apache.zookeeper:zookeeper:3.4.6'){
+	    exclude group: 'org.slf4j'
+	     exclude group: 'junit'
+	}
+	compile ':tsdb:2.0.1@jar'
+	compile ':suasync:1.4.0@jar'
+    testCompile "junit:junit:4.11"
+    testCompile "org.slf4j:slf4j-log4j12:1.7.7"
+    testCompile "org.slf4j:jcl-over-slf4j:1.7.7"
+}
+generateThriftSource {
+    out file('build/generated-src/thrift/main')
+    verbose false
+    debug false
+    strict false
+
+    //
+    // Set the thrift executable (optional)
+    //
+    //executable '/usr/bin/thrift'
+
+    generators {
+        //
+        // --gen java:hashcode,beans
+        //
+        java {
+            //
+            // Options passed to the `java` generator
+            //
+            option 'hashcode'
+            option 'beans'
+        }
+
+    }
+}
+
+//
+// optional: add generated sources as a source directory in IDEA
+//
+idea.module.excludeDirs = []
+idea.module.sourceDirs += file('build/generated-src/thrift/main')
+idea.module.jdkName = '1.8'
