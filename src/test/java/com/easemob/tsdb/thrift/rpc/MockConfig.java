@@ -17,6 +17,8 @@ public class MockConfig implements TSDBDelegate.ConfigDelegate, Constants {
         map.put(PLUGIN_KAFKA_ZOOKEEPER_HOST, "127.0.0.1:2181");
         map.put(PLUGIN_KAFKA_PLAIN_TEXT_METRICS_TOPIC, "plain");
         map.put(PLUGIN_KAFKA_PLAIN_TEXT_METRICS_TOPIC_PARTITIONS, "10");
+        map.put(PLUGIN_KAFKA_PERFIX+"fetch.wait.max.ms", "10");
+        map.put(PLUGIN_KAFKA_PERFIX+"fetch.message.max.bytes", String.valueOf(1024*10));
 
 
     }
