@@ -63,3 +63,7 @@ exist in the OpenTSDB's distribution, so just skip such jars and only copy non-e
 
 Then modify OpenTSDB's conf file and add properties required by this plugin,
 all properties can be found in the class com.easemob.tsdb.thrift.rpc.Constants
+
+To enable the rpc plugins provided by this project, please make sure such line exist in the Opentsdb's conf
+
+    tsd.rpc.plugins=com.easemob.thrift.tsdb.rpc.ThriftTSDBRpcPlugin,com.easemob.tsdb.kafka.plugin.KafkaConfumerRPCPlugin
