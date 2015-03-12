@@ -29,15 +29,15 @@ public class TestClient  implements Constants{
         TProtocol protocol = new TBinaryProtocol(transport);
         client = new ThriftTsdbRpcService.Client(protocol);
         for(int i=0;i<100;i++)
-        pushData(client);
+        pushData(client, i);
         transport.close();
     }
 
-    private static void pushData(ThriftTsdbRpcService.Client client) throws org.apache.thrift.TException {
+    private static void pushData(ThriftTsdbRpcService.Client client, int i) throws org.apache.thrift.TException {
         TSData tsData = new TSData();
         tsData.setName("m1");
         tsData.setTimestamp(new Date().getTime());
-        tsData.setValue(1);
+        tsData.setValue(i);
         Map<String, String> tags = new HashMap<>();
         tags.put("t1", "v1");
 
