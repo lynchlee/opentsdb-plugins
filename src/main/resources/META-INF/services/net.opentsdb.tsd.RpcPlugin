@@ -1,2 +1,2 @@
-com.easemob.tsdb.kafka.plugin.KafkaConfumerRPCPlugin
+com.easemob.tsdb.kafka.plugin.KafkaConsumerRPCPlugin
 com.easemob.tsdb.thrift.rpc.ThriftTSDBRpcPlugin

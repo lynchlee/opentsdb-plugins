@@ -15,8 +15,8 @@ import java.io.IOException;
  * @date 3/11/15
  */
 @SuppressWarnings("UnusedDeclaration")
-public class KafkaConfumerRPCPlugin extends AbstractTSDBRpcPlugin {
-    private final static Logger logger = LoggerFactory.getLogger(KafkaConfumerRPCPlugin.class);
+public class KafkaConsumerRPCPlugin extends AbstractTSDBRpcPlugin {
+    private final static Logger logger = LoggerFactory.getLogger(KafkaConsumerRPCPlugin.class);
     private static volatile KafkaConsumerGroups kafkaConsumerGroups;
 
     @Override
