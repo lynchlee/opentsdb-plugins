@@ -66,4 +66,4 @@ all properties can be found in the class com.easemob.tsdb.thrift.rpc.Constants
 
 To enable the rpc plugins provided by this project, please make sure such line exist in the Opentsdb's conf
 
-    tsd.rpc.plugins=com.easemob.thrift.tsdb.rpc.ThriftTSDBRpcPlugin,com.easemob.tsdb.kafka.plugin.KafkaConfumerRPCPlugin
+    tsd.rpc.plugins=com.easemob.thrift.tsdb.rpc.ThriftTSDBRpcPlugin,com.easemob.tsdb.kafka.plugin.KafkaConsumerRPCPlugin
