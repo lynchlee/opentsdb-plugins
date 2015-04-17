@@ -56,6 +56,8 @@ There are also two properties that should be defined in the configuration file:
 
 The artifact will be build and save to *build/distributions/*
 
+**NOTE: this requires Thrift 0.9.2**
+
 ### Install
 
 Copy the build artifact and copy the jars to the OpenTSDB's lib dir, please note some dependencies of this project maybe already
