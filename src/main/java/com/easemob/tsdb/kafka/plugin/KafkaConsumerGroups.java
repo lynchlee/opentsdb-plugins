@@ -52,14 +52,14 @@ public class KafkaConsumerGroups implements Closeable, Constants {
         int plainTextTopicPartition = ConfigUtils.getIntValue(configuration, PLUGIN_KAFKA_PLAIN_TEXT_METRICS_TOPIC_PARTITIONS, PROCESSOR_COUNT);
         if (plainTextTopic != null && !plainTextTopic.isEmpty()) {
             topicCountMap.put(plainTextTopic, plainTextTopicPartition);
-            logger.info("Consume plain text metrics from topic " + plainTextTopic + " with partition size " + plainTextTopicPartition);
+            logger.info("Consume plain text metrics from topic {}  with partition size {}", plainTextTopic, plainTextTopicPartition);
         }
         String tsdataTopic = configuration.get(PLUGIN_KAFKA_TSDATA_METRICS_TOPIC);
         int tsdataTopicPartition = ConfigUtils.getIntValue(configuration, PLUGIN_KAFKA_TSDATA_METRICS_TOPIC_PARTITIONS, PROCESSOR_COUNT);
 
         if (tsdataTopic != null && !tsdataTopic.isEmpty()) {
             topicCountMap.put(tsdataTopic, tsdataTopicPartition);
-            logger.info("Consume tsdata metrics from topic " + tsdataTopic + " with partition size " + tsdataTopicPartition);
+            logger.info("Consume tsdata metrics from topic {}  with partition size {}", tsdataTopic, tsdataTopicPartition);
         }
         if (topicCountMap.isEmpty()) {
             logger.info("No kafka topic provided, skipping");
@@ -125,11 +125,11 @@ public class KafkaConsumerGroups implements Closeable, Constants {
             String metrics = null;
             try {
                 metrics = new String(message.message());
-                logger.debug("persisting metrics : "+metrics);
+                logger.debug("persisting plain text metrics : {}", metrics);
                 metricsService.putString(metrics);
                 plainTextMetricsCounter.incrementAndGet();
             } catch (TException e) {
-                logger.error("Failed to put string metrics: " + metrics);
+                logger.error("Failed to put string metrics: {}", metrics);
             }
         }
     }
@@ -147,10 +147,11 @@ public class KafkaConsumerGroups implements Closeable, Constants {
 
             try {
                 deserializer.deserialize(tsData, message.message());
+                logger.debug("persisting TSData metrics : {}", tsData);
                 metricsService.putTSData(tsData);
                 tsdataMetricsCounter.incrementAndGet();
             } catch (TException e) {
-                logger.error("Failed to put tsdata metrics " + tsData);
+                logger.error("Failed to put tsdata metrics {}", tsData);
             }
         }
     }
@@ -165,12 +166,12 @@ public class KafkaConsumerGroups implements Closeable, Constants {
         });
         String zkHost = configuration.get(PLUGIN_KAFKA_ZOOKEEPER_HOST);
         if (zkHost == null || zkHost.isEmpty()) {
-            logger.warn("no configuration " + PLUGIN_KAFKA_ZOOKEEPER_HOST + " provided, using " + OPENTSDB_ZOOKEEPER_HOST + "from OpenTSDB");
+            logger.warn("no configuration {}  provided, using {} from OpenTSDB", PLUGIN_KAFKA_ZOOKEEPER_HOST, OPENTSDB_ZOOKEEPER_HOST);
             zkHost = configuration.get(OPENTSDB_ZOOKEEPER_HOST);
         }
         String groupId = configuration.get(PLUGIN_KAFKA_GROUP_ID);
         if (zkHost == null || groupId == null) {
-            throw new IllegalArgumentException("required property is missing: " + PLUGIN_KAFKA_ZOOKEEPER_HOST + "," + PLUGIN_KAFKA_GROUP_ID);
+            throw new IllegalArgumentException("required property is missing: " + PLUGIN_KAFKA_ZOOKEEPER_HOST + "" + PLUGIN_KAFKA_GROUP_ID);
         }
         props.put("zookeeper.connect", zkHost);
         props.put("group.id", groupId);

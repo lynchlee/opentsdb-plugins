@@ -27,9 +27,9 @@ This kafka consumer reads at most two topics, the purpose is same as above, one 
 and the other is for the tsdata's binary data.
 
 The plain text's topic name can be configured with property `em.kafka.text.topic` and it's partition number is configured
-with property `em.kafka.text.topic.partition`.
+with property `em.kafka.text.topic.partitions`.
 
-The tsdata's topic name is configured with property `em.kafka.tsdata.topic` and `em.kafka.tsdata.topic.partiton`
+The tsdata's topic name is configured with property `em.kafka.tsdata.topic` and `em.kafka.tsdata.topic.partitions`
 
 Note: the topic name property has no default value, so if there is no such property provided, then this plugin will not fetch
 any data from kafka but just quite.
