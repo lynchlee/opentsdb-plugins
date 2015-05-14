@@ -14,20 +14,21 @@ buildscript {
     }
 }
 repositories {
+    mavenCentral()
     jcenter()
 	flatDir { dirs 'libs' }
 }
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.7'
-	compile('com.thinkaurelius.thrift:thrift-server:0.3.7' ) {
-                                                           	    exclude group: 'org.slf4j'
-                                                           	     exclude group: 'junit'
-                                                           	     exclude group: 'org.apache.thrift'
-                                                           	}
+	compile('com.thinkaurelius.thrift:thrift-server:0.3.7' ){
+        exclude group: 'org.slf4j'
+        exclude group: 'junit'
+        exclude group: 'org.apache.thrift'
+    }
 	compile('org.apache.thrift:libthrift:0.9.2'){
-	exclude group: 'org.slf4j'
-	exclude group: 'org.apache.httpcomponents'
+	    exclude group: 'org.slf4j'
+	    exclude group: 'org.apache.httpcomponents'
 	}
 	compile( 'org.apache.kafka:kafka_2.10:0.8.1.1'){
 	    exclude group: 'org.slf4j'
@@ -35,9 +36,10 @@ dependencies {
 	    exclude group: 'org.apache.zookeeper'
 	    exclude group: 'log4j'
 	}
-	compile( 'org.apache.zookeeper:zookeeper:3.4.6'){
+    runtime( 'org.apache.zookeeper:zookeeper:3.3.6'){
 	    exclude group: 'org.slf4j'
-	     exclude group: 'junit'
+        exclude group: 'log4j'
+	    exclude group: 'junit'
 	}
 	compile ':tsdb:2.0.1@jar'
 	compile ':suasync:1.4.0@jar'
@@ -77,5 +79,5 @@ generateThriftSource {
 idea.module.excludeDirs = []
 idea.module.sourceDirs += file('build/generated-src/thrift/main')
 idea.module.jdkName = '1.8'
-version='1.0.0'
+version='1.0.1'
 sourceCompatibility = 1.8

@@ -29,6 +29,7 @@ public class ThriftMetricsService implements ThriftTsdbRpcService.Iface, ThriftT
         if (o instanceof Exception) {
             logger.error("failed to insert data point due to error ", (Exception) o);
         }
+
         return null;
     };
 
@@ -37,6 +38,8 @@ public class ThriftMetricsService implements ThriftTsdbRpcService.Iface, ThriftT
         if (tsdata == null) {
             return;
         }
+
+        logger.info("insert TSData into TSDB. {}", tsdata);
         tsdb.addPoint(tsdata.getName(), tsdata.getTimestamp(), tsdata.getValue(), tsdata.getTags()).addCallback(LOGGING_CALLBACK);
     }
 
@@ -88,7 +91,7 @@ public class ThriftMetricsService implements ThriftTsdbRpcService.Iface, ThriftT
             tsdata.setValue(value);
             return tsdata;
         } catch (Exception e) {
-            logger.error("Failed to parse '" + s + "' to data point, just ignore this", e);
+            logger.error("Failed to parse '{}' to data point, just ignore this", e);
             return null;
         }
 
