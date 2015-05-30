@@ -39,4 +39,5 @@ public interface Constants {
     String OPENTSDB_ZOOKEEPER_HOST="tsd.storage.hbase.zk_quorum";
     String PLUGIN_KAFKA_GROUP_ID = PLUGIN_KAFKA_PERFIX + "group.id";
 
+
 }

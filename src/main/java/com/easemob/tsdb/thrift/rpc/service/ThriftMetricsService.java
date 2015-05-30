@@ -28,6 +28,8 @@ public class ThriftMetricsService implements ThriftTsdbRpcService.Iface, ThriftT
     private static final Callback<Object, Object> LOGGING_CALLBACK = o -> {
         if (o instanceof Exception) {
             logger.error("failed to insert data point due to error ", (Exception) o);
+        }else if(o !=null){
+            logger.debug("tsdb add data point returned {}", o);
         }
 
         return null;
@@ -39,8 +41,9 @@ public class ThriftMetricsService implements ThriftTsdbRpcService.Iface, ThriftT
             return;
         }
 
-        logger.info("insert TSData into TSDB. {}", tsdata);
         tsdb.addPoint(tsdata.getName(), tsdata.getTimestamp(), tsdata.getValue(), tsdata.getTags()).addCallback(LOGGING_CALLBACK);
+        logger.info("insert TSData into TSDB. {}", tsdata);
+
     }
 
     @Override
