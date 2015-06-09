@@ -111,6 +111,12 @@ public class KafkaConsumerGroups implements Closeable, Runnable, Constants {
                 if (skipTSDB) {
                     logger.debug("skipping persist {} to OpenTSDB", tsData);
                 } else {
+
+                    if (isInvalidMetrics(tsData.getName())) {
+                        logger.warn("invalid format of metrics name {}", tsData.getName());
+                        continue;
+                    }
+
                     metricsService.putTSData(tsData);
                 }
                 logger.debug("persisting TSData metrics to queue done");
@@ -118,6 +124,10 @@ public class KafkaConsumerGroups implements Closeable, Runnable, Constants {
                 logger.error("Failed to put tsdata metrics {}", tsData);
             }
         }
+    }
+
+    private boolean isInvalidMetrics(String metrics) {
+        return metrics.contains("#") || metrics.contains(":");
     }
 
 }
