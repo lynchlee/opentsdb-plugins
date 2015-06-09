@@ -42,13 +42,12 @@ public class ThriftMetricsService implements ThriftTsdbRpcService.Iface, ThriftT
         }
 
         try {
-            tsdb.addPoint(tsdata.getName(), tsdata.getTimestamp(), tsdata.getValue(), tsdata.getTags())
-                    .join();
+            tsdb.addPoint(tsdata.getName(), tsdata.getTimestamp(), tsdata.getValue(), tsdata.getTags());
         }catch (Exception e){
             logger.error("Failed to insert data to OpenTSDB", e);
         }
 //                .addCallback(LOGGING_CALLBACK);
-        logger.info("insert TSData into TSDB. {}", tsdata);
+        logger.debug("insert TSData into TSDB. {}", tsdata);
 
     }
 
