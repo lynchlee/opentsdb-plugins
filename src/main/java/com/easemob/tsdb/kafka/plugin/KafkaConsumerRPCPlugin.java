@@ -1,5 +1,6 @@
 package com.easemob.tsdb.kafka.plugin;
 
+import com.easemob.tsdb.thrift.models.TSData;
 import com.easemob.tsdb.thrift.rpc.AbstractTSDBRpcPlugin;
 import com.easemob.tsdb.thrift.rpc.TSDBWrapper;
 import com.stumbleupon.async.Deferred;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.concurrent.*;
 
 /**
  * @author stliu <stliu@apache.org>
@@ -18,12 +20,13 @@ import java.io.IOException;
 public class KafkaConsumerRPCPlugin extends AbstractTSDBRpcPlugin {
     private final static Logger logger = LoggerFactory.getLogger(KafkaConsumerRPCPlugin.class);
     private static volatile KafkaConsumerGroups kafkaConsumerGroups;
-
+    private final ExecutorService executorService = Executors.newCachedThreadPool();
     @Override
     public void initialize(TSDB tsdb) {
         kafkaConsumerGroups = new KafkaConsumerGroups(new TSDBWrapper(tsdb));
-        kafkaConsumerGroups.start();
+        executorService.submit(kafkaConsumerGroups);
     }
+
 
 
     @Override
@@ -31,7 +34,8 @@ public class KafkaConsumerRPCPlugin extends AbstractTSDBRpcPlugin {
         Deferred<Object> deferred = new Deferred<>();
         try {
             kafkaConsumerGroups.close();
-        } catch (IOException e) {
+            executorService.shutdown();
+        } catch (Exception e) {
             logger.error("Failed to stop kafka consumer group", e);
         }
         return deferred;
