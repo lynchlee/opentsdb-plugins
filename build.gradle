@@ -41,7 +41,7 @@ dependencies {
         exclude group: 'log4j'
 	    exclude group: 'junit'
 	}
-	compile ':tsdb:2.0.1@jar'
+	compile ':opentsdb:2.1.3@jar'
 	compile ':suasync:1.4.0@jar'
     testCompile "junit:junit:4.11"
     testCompile "org.slf4j:slf4j-log4j12:1.7.7"
@@ -79,5 +79,5 @@ generateThriftSource {
 idea.module.excludeDirs = []
 idea.module.sourceDirs += file('build/generated-src/thrift/main')
 idea.module.jdkName = '1.8'
-version='1.0.1'
+version='1.0.2'
 sourceCompatibility = 1.8
