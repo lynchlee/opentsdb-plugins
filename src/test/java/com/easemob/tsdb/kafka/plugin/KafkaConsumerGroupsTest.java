@@ -9,6 +9,6 @@ import com.easemob.tsdb.thrift.rpc.MockTSDB;
 public class KafkaConsumerGroupsTest {
     public static void main(String[] args) {
         KafkaConsumerGroups kafkaConsumerGroups = new KafkaConsumerGroups(new MockTSDB());
-        kafkaConsumerGroups.start();
+        kafkaConsumerGroups.run();
     }
 }
