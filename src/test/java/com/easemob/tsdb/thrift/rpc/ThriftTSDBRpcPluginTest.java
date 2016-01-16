@@ -39,8 +39,6 @@ public class ThriftTSDBRpcPluginTest implements Constants {
         Thread.sleep(time);
         logger.info("now starting client to connect to server");
 
-
-
         transport = new TSocket("127.0.0.1", PLUGIN_THRIFT_PORT_DEFAULT);
         System.out.println("-------");
         transport = new TFramedTransport.Factory().getTransport(transport);

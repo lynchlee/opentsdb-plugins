@@ -81,6 +81,5 @@ public class ThriftTSDBRpcPlugin extends AbstractTSDBRpcPlugin {
 
     @Override
     public void collectStats(StatsCollector statsCollector) {
-        //TODO
     }
 }

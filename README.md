@@ -1,4 +1,7 @@
-This project provides two [OpenTSDB](http://opentsdb.net) *rpc* plugins.
+[![Build Status](https://travis-ci.org/lynchlee/opentsdb-plugins.svg?branch=master)](https://travis-ci.org/lynchlee/opentsdb-plugins)
+
+
+This project provides two [OpenTSDB(v2.1.3)](http://opentsdb.net) *rpc* plugins.
 
 ### The Thrift Plugin
 
@@ -23,32 +26,40 @@ While, this is somehow misusing the OpenTSDB's RPC mechanism, since it is not a 
 
 What this plugin does is simple start a kafka consumer and fetch data from kafka and then write it to OpenTSDB.
 
-This kafka consumer reads at most two topics, the purpose is same as above, one topic for the plain text type data,
-and the other is for the tsdata's binary data.
-
-The plain text's topic name can be configured with property `em.kafka.text.topic` and it's partition number is configured
-with property `em.kafka.text.topic.partitions`.
-
-The tsdata's topic name is configured with property `em.kafka.tsdata.topic` and `em.kafka.tsdata.topic.partitions`
+This kafka consumer reads one more topics, you can shot data only type of plain text or tsdata's binary into every topic.
 
 Note: the topic name property has no default value, so if there is no such property provided, then this plugin will not fetch
 any data from kafka but just quite.
 
-The partiton property is used to caucalute the consumer thread count, by default it is the cpu cores.
+We can get you topics via this configured property `em.kafka.topics`, you must split them by `,`, they are just index,
+real topic name will be provode by the property named `em.kafka.topicN.name`
+e.g: `em.kafka.topics=topic1,topic2,...,topicN`
 
-There are also two properties that should be defined in the configuration file:
+For each topic there are some properties that should be defined in the configuration file:
+(e.g: topic1)
 
-1. em.kafka.zookeeper.connect
+1. `em.kafka.topic1.name`
+
+   topic name of kafka
+
+2. `em.kafka.topic1.datatype`
+
+   the data type of your data shot into this topic, only two value for you : `plaintext` for plain text value and `tsdata`
+   for tsdata's binary.
+   Metrics schemas:
+     - plaintext (just only one space between fragements):
+       * (name        tags                   timestamp  value)
+       * sys.cpu.user host=webserver01,cpu=0 1356998400 1
+     - tsdata:
+       * TSData(name:sys.cpu.user, value:6.0, timestamp:1356998400, tags:{host=webserver01, cpu=0})
+
+3. `em.kafka.topic1.zookeeper.connect`
 
     The zk host which will be used for the kafka consumer to connect to.
 
-    If there is no such property, then the value of property `tsd.storage.hbase.zk_quorum` will be used.
+4. `em.kafka.topic1.group.id`
 
-2. em.kafka.client.id
-
-    The client id used to identify kafka consumer group
-
-
+    The client id used to identify kafka consumer group.
 
 ### How to build
 
