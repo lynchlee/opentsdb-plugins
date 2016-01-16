@@ -1,0 +1,13 @@
+sudo: required
+language: java
+before_install:
+  - bash travis/install-thrift.sh
+script: ./gradlew clean build assembleMainDist
+jdk:
+  - oraclejdk8
+notifications:
+    email: 
+      recipients:
+        - lynch.lee9527@gmail.com
+      on_success: always
+      on_failure: always
