@@ -25,4 +25,20 @@ public class ConfigUtils {
             return defaultValue;
         }
     }
+
+
+    public static boolean getBooleanValue(Map<String, String> map, String propertyName, boolean defaultValue) {
+        try {
+            if (map.containsKey(propertyName)) {
+                String value = map.get(propertyName);
+                return Boolean.valueOf(value);
+            } else {
+                return defaultValue;
+            }
+        } catch (Exception e) {
+            logger.warn("Failed to get boolean property value of " + propertyName + " using default one instead " + defaultValue);
+            return defaultValue;
+        }
+    }
+
 }

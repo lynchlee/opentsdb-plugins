@@ -10,6 +10,7 @@ import java.util.Map;
  * @date 3/11/15
  */
 public class MockTSDB implements TSDBDelegate {
+
     @Override
     public Deferred<Object> addPoint(String name, long timestamp, double value, Map<String, String> tags) {
         System.out.println(String.format("add point %s %s %s %s", name, timestamp, value, tags));
