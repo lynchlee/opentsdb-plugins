@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/lynchlee/opentsdb-plugins.svg?branch=master)](https://travis-ci.org/lynchlee/opentsdb-plugins)
-
+[![Build Status](https://travis-ci.org/easemob/opentsdb-plugins.svg?branch=master)](https://travis-ci.org/easemob/opentsdb-plugins)
 
 This project provides two [OpenTSDB(v2.1.3)](http://opentsdb.net) *rpc* plugins.
 
