@@ -58,9 +58,7 @@ public class KafkaTSDataConsumer extends AbstractKafkaConsumer {
                         logger.debug("skipping persist {} to OpenTSDB", tsData);
                     }
                 } else {
-
-                    if (isInvalidMetrics(tsData.getName())) {
-                        logger.warn("invalid format of metrics name {}", tsData.getName());
+                    if (isValidMetricAndTags(tsData.getName(), tsData.getTags())) {
                         return;
                     }
 

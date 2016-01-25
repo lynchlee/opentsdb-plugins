@@ -55,8 +55,7 @@ public class KafkaPlaintextConsumer extends AbstractKafkaConsumer {
                 } else {
                     TSData tsData = parseString2TSData(metrics);
 
-                    if (isInvalidMetrics(tsData.getName())) {
-                        logger.warn("invalid format of metrics name {}", tsData.getName());
+                    if (isValidMetricAndTags(tsData.getName(), tsData.getTags())) {
                         return;
                     }
 

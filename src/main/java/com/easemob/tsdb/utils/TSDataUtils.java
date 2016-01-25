@@ -1,10 +1,11 @@
 package com.easemob.tsdb.utils;
 
 import com.easemob.tsdb.thrift.models.TSData;
+import net.opentsdb.core.Const;
+import net.opentsdb.core.Tags;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,8 +71,35 @@ public class TSDataUtils {
         return map;
     }
 
-    public static boolean isInvalidMetrics(String metrics) {
-        return metrics.contains("#") || metrics.contains(":");
+
+    /**
+     * Validates the given metric and tags.
+     *
+     * @throws IllegalArgumentException if any of the arguments aren't valid.
+     */
+    public static boolean isValidMetricAndTags(final String metric, final Map<String, String> tags) {
+        if (tags.size() <= 0) {
+            logger.warn("Need at least one tag (metric=" + metric + ", tags=" + tags + ')');
+            return false;
+        } else if (tags.size() > Const.MAX_NUM_TAGS) {
+            logger.warn("Too many tags: " + tags.size() + " maximum allowed: " + Const.MAX_NUM_TAGS + ", tags: " + tags);
+            return false;
+        }
+
+        try {
+            Tags.validateString("metric name", metric);
+            for (final Map.Entry<String, String> tag : tags.entrySet()) {
+                Tags.validateString("tag name", tag.getKey());
+                Tags.validateString("tag value", tag.getValue());
+            }
+
+            return true;
+        } catch (IllegalArgumentException iae) {
+            System.out.println(iae.getMessage());
+            logger.warn(iae.getMessage());
+        }
+
+        return false;
     }
 
 }

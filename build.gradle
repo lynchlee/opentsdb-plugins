@@ -86,5 +86,5 @@ generateThriftSource {
 idea.module.excludeDirs = []
 idea.module.sourceDirs += file('build/generated-src/thrift/main')
 idea.module.jdkName = '1.8'
-version='1.0.3.Final'
+version='1.0.4.RC1'
 sourceCompatibility = 1.8
