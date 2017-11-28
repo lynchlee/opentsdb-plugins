@@ -39,7 +39,7 @@ For each topic there are some properties that should be defined in the configura
 
 1. `em.kafka.topic1.name`
 
-   topic name of kafka
+   topic names of kafka
 
 2. `em.kafka.topic1.datatype`
 
