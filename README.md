@@ -74,8 +74,8 @@ Copy the build artifact and copy the jars to the OpenTSDB's lib dir, please note
 exist in the OpenTSDB's distribution, so just skip such jars and only copy non-exist ones.
 
 Then modify OpenTSDB's conf file and add properties required by this plugin,
-all properties can be found in the class com.easemob.tsdb.thrift.rpc.Constants
+all properties can be found in the class cn.kenshinn.tsdb.thrift.rpc.Constants
 
 To enable the rpc plugins provided by this project, please make sure such line exist in the Opentsdb's conf
 
-    tsd.rpc.plugins=com.easemob.thrift.tsdb.rpc.ThriftTSDBRpcPlugin,com.easemob.tsdb.kafka.plugin.KafkaConsumerRPCPlugin
+    tsd.rpc.plugins=cn.kenshinn.thrift.tsdb.rpc.ThriftTSDBRpcPlugin,cn.kenshinn.tsdb.kafka.plugin.KafkaConsumerRPCPlugin

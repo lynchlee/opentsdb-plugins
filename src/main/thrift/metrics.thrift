@@ -1,4 +1,4 @@
-namespace java com.easemob.tsdb.thrift.models
+namespace java cn.kenshinn.tsdb.thrift.models
 
 /*
     TSData stands for Time Series Data
