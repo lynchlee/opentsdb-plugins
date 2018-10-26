@@ -1,5 +1,7 @@
 package cn.kenshinn.tsdb.thrift.rpc.service;
 
+import cn.kenshinn.tsdb.thrift.models.TSData;
+import cn.kenshinn.tsdb.thrift.models.ThriftTsdbRpcService;
 import org.apache.thrift.TException;
 import org.apache.thrift.async.AsyncMethodCallback;
 import org.slf4j.Logger;

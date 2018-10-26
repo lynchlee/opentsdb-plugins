@@ -1,5 +1,6 @@
 package cn.kenshinn.tsdb;
 
+import cn.kenshinn.tsdb.thrift.models.TSData;
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;

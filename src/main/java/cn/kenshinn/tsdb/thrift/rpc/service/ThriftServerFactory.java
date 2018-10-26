@@ -1,5 +1,6 @@
 package cn.kenshinn.tsdb.thrift.rpc.service;
 
+import cn.kenshinn.tsdb.thrift.models.ThriftTsdbRpcService;
 import cn.kenshinn.tsdb.thrift.rpc.Constants;
 import cn.kenshinn.tsdb.utils.ConfigUtils;
 import com.thinkaurelius.thrift.Message;

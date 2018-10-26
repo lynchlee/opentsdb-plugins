@@ -1,5 +1,6 @@
 package cn.kenshinn.tsdb.kafka.plugin;
 
+import cn.kenshinn.tsdb.thrift.models.TSData;
 import cn.kenshinn.tsdb.thrift.rpc.service.TSDBDelegate;
 import kafka.consumer.KafkaStream;
 import kafka.message.MessageAndMetadata;

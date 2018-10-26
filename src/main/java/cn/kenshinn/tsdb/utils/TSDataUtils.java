@@ -1,5 +1,6 @@
 package cn.kenshinn.tsdb.utils;
 
+import cn.kenshinn.tsdb.thrift.models.TSData;
 import net.opentsdb.core.Const;
 import net.opentsdb.core.Tags;
 import org.slf4j.Logger;

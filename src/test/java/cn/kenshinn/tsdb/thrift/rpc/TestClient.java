@@ -1,5 +1,7 @@
 package cn.kenshinn.tsdb.thrift.rpc;
 
+import cn.kenshinn.tsdb.thrift.models.TSData;
+import cn.kenshinn.tsdb.thrift.models.ThriftTsdbRpcService;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;
