@@ -66,7 +66,7 @@ For each topic there are some properties that should be defined in the configura
 
 The artifact will be build and save to *build/distributions/*
 
-**NOTE: this requires Thrift 0.9.2**
+**NOTE: this requires Thrift 0.9.3**
 
 ### Install
 
